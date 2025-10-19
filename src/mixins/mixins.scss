@@ -1,0 +1,14 @@
+@mixin block($height: auto) {
+    width: 100%;
+    height: $height;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    // border: 1px solid #000;
+}
+
+@mixin container {
+    width: calc(100% - 40px);
+    height: 100%;
+    // border: 1px solid #000;
+}

@@ -1,0 +1,18 @@
+.homeNews__card{
+    width: 320px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    img{
+        height: 160px;
+    }
+    &-info{
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        h3{
+            font-size: 25px;
+        }
+    }
+}
