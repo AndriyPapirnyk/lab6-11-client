@@ -1,0 +1,36 @@
+.catalog__filter{
+    width: 100%;
+    height: auto;
+    background-color: rgb(14, 14, 28);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 20px;
+    border-top: 1px solid #666;
+    &-options{
+        display: flex;
+        align-items: center;
+        gap: 40px;
+    }
+    .input__group{
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        label{
+            font-size: 14px;
+            font-weight: 500;
+        }
+        input{
+            width: 250px;
+            height: 50px;
+            background-color: rgb(25, 24, 46);
+            border: none;
+            border-radius: 5px;
+            padding: 0 0 0 10px;
+            color: #CCCCCC;
+            &:focus{
+                outline: none;
+            }
+        }
+    }
+}

@@ -1,0 +1,27 @@
+.custom-select {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-family: sans-serif;
+    .select-label {
+        font-size: 14px;
+        font-weight: 500;
+    }
+
+    .select-input {
+        width: 150px;
+        height: 50px;
+        padding: 8px 12px;
+        border-radius: 6px;
+        background-color: rgb(25, 24, 46);
+        color: #CCCCCC;
+        cursor: pointer;
+        font-size: 15px;
+        transition: 0.2s ease;
+        border: none;
+        &:focus {
+            outline: none;
+            border: .3px solid #999;
+        }
+    }
+}
