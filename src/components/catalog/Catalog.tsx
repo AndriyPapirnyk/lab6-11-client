@@ -1,33 +1,39 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useCars } from '../../context/CarsContext';
 import CatalogList from '../CatalogList/CatalogList';
 import CatalogFilters from '../catalogFilters/CatalogFilters';
+import Spinner from '../ui/Spinner/Spinner';
 import './Catalog.scss';
 
 export default function Catalog() {
-  const { cars } = useCars();
+  const { cars, loading, getCars } = useCars();
   
   const [selectedType, setSelectedType] = useState<string>("");
   const [selectedPrice, setSelectedPrice] = useState<string>("");
   const [searchTerm, setSearchTerm] = useState<string>("");
 
-  const filteredCars = cars.filter((car) => {
-      const matchesSearch = car.name.toLowerCase().includes(searchTerm.toLowerCase());
-      
-      const matchesType = selectedType ? car.type === selectedType : true;
+  useEffect(() => {
+    const filters: any = {};
 
-      let matchesPrice = true;
-      if (selectedPrice) {
-          const [min, max] = selectedPrice.split('-').map(Number);
-          if (selectedPrice.includes('+')) {
-             matchesPrice = car.price >= 100000;
-          } else {
-             matchesPrice = car.price >= min && car.price <= max;
-          }
-      }
+    if (selectedType) filters.type = selectedType;
+    if (searchTerm) filters.search = searchTerm;
+    
+    if (selectedPrice) {
+        if (selectedPrice.includes('+')) {
+            filters.minPrice = 100000;
+        } else {
+            const [min, max] = selectedPrice.split('-');
+            filters.minPrice = min;
+            filters.maxPrice = max;
+        }
+    }
 
-      return matchesSearch && matchesType && matchesPrice;
-  });
+    const delayDebounceFn = setTimeout(() => {
+        getCars(filters);
+    }, 500);
+
+    return () => clearTimeout(delayDebounceFn);
+  }, [selectedType, selectedPrice, searchTerm]);
 
   return (
     <section className='catalog'>
@@ -39,7 +45,7 @@ export default function Catalog() {
             searchTerm={searchTerm}
             setSearchTerm={setSearchTerm}
         />
-        <CatalogList cars={filteredCars} />
+        {loading ? <Spinner /> : <CatalogList cars={cars} />}
     </section>
   )
 }

@@ -3,7 +3,7 @@ import PrimaryButton from "../ui/PrimaryButton";
 import "./CatalogListCard.scss";
 
 interface CatalogListCardProps {
-    id: number; 
+    id: string; 
     name: string;
     image: string;
     description: string;
