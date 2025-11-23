@@ -1,7 +1,9 @@
+import { Link } from "react-router-dom";
 import PrimaryButton from "../ui/PrimaryButton";
 import "./CatalogListCard.scss";
 
 interface CatalogListCardProps {
+    id: number; 
     name: string;
     image: string;
     description: string;
@@ -9,6 +11,7 @@ interface CatalogListCardProps {
 }
 
 export default function CatalogListCard({
+    id,
     name,
     image,
     description,
@@ -23,7 +26,9 @@ export default function CatalogListCard({
                 <h3>Price:</h3>
                 <span>${price.toLocaleString()}</span>
             </div>
-            <PrimaryButton type={1} text="View more" />
+            <Link to={`/catalog/${id}`}>
+                <PrimaryButton type={1} text="View more" />
+            </Link>
         </div>
     );
 }

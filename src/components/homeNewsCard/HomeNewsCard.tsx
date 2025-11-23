@@ -1,6 +1,6 @@
 import './HomeNewsCard.scss';
 
-export default function HomeNewsCard({imageUrl, title, description}: {imageUrl?: string, title?: string, description?: string}) {
+export default function HomeNewsCard({imageUrl, title}: {imageUrl?: string, title?: string, description?: string}) {
   return (
     <div className='homeNews__card'>
         <img src={imageUrl} alt="" />
@@ -12,4 +12,3 @@ export default function HomeNewsCard({imageUrl, title, description}: {imageUrl?:
   )
 }
 
-// "https://pngimg.com/d/mercedes_PNG80146.png"
