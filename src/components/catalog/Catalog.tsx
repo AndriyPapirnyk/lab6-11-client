@@ -30,7 +30,7 @@ export default function Catalog() {
 
     const delayDebounceFn = setTimeout(() => {
         getCars(filters);
-    }, 500);
+    }, 1000);
 
     return () => clearTimeout(delayDebounceFn);
   }, [selectedType, selectedPrice, searchTerm]);

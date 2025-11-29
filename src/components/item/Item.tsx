@@ -3,12 +3,15 @@ import { useCars, type Car } from "../../context/CarsContext";
 import PrimaryButton from "../ui/PrimaryButton";
 import Spinner from "../ui/Spinner/Spinner";
 import { useEffect, useState } from "react";
+import { useDispatch } from 'react-redux';
+import { addToCart } from '../../store/cartSlice';
 import './item.scss';
 
 export default function Item() {
     const { id } = useParams<{ id: string }>();
     const { getCarById } = useCars();
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const [car, setCar] = useState<Car | null>(null);
     const [isLoading, setIsLoading] = useState(true);
 
@@ -20,6 +23,13 @@ export default function Item() {
             });
         }
     }, [id]);
+
+    const handleAddToCart = () => {
+        if (car) {
+            dispatch(addToCart(car));
+            navigate('/cart');
+        }
+    };
 
     if (isLoading) return <Spinner />;
     if (!car) return <div>Car not found</div>;
@@ -50,9 +60,11 @@ export default function Item() {
                     <h2 className="item-page__price">Price: ${car.price.toLocaleString()}</h2>
                     <div className="item-page__buttons">
                         <div onClick={() => navigate(-1)}>
-                             <PrimaryButton type={2} text="Go back" />
+                             <PrimaryButton type={1} text="Go back" />
                         </div>
-                        <PrimaryButton type={1} text="Add to cart" />
+                        <div onClick={handleAddToCart}>
+                            <PrimaryButton type={1} text="Add to cart" />
+                        </div>
                     </div>
                 </div>
             </div>
